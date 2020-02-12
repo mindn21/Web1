@@ -1,0 +1,126 @@
+
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8" name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>calculator</title>
+
+    <style>
+
+      .box1{
+        border:1px solid orange;
+        border-radius : 10px;
+        padding: 5px;
+        text-align:center;
+      }
+
+      .box2 {
+        border:1px solid powderblue;
+        margin:15px;
+        padding:15px;
+        text-align:center;
+
+
+      }
+      .msgbox{
+        border:2px solid gray;
+        height:40px;
+        font-size: 25px;
+        font-weight:bold;
+        margin:5px 10px 5px 10px;
+        padding:10px 10px 0px 10px;
+        text-align:right;
+      }
+
+      form{
+        padding-bottom: 10px;
+        text-align:center;
+      }
+
+      input[type=button]{
+        display:inline-block;
+        width: 40px;
+        border:1px solid lightgray;
+        height:40px;
+      }
+
+
+
+
+    </style>
+
+    <script type="text/javascript">
+
+      function evalmake(num){
+        var str = document.getElementsByName('msgbox')[0].innerHTML;
+        str = str + num ;
+        document.getElementsByName('msgbox')[0].innerHTML = str;
+      }
+
+      function eval_delete(){
+        document.getElementsByName('msgbox')[0].innerHTML = "";
+      }
+
+      function eval_d1(){
+        var str = document.getElementsByName('msgbox')[0].innerHTML;
+        str = str.substr(0, str.length-1);
+
+        document.getElementsByName('msgbox')[0].innerHTML = str;
+      }
+
+      function evaldo(){
+        var str = document.getElementsByName('msgbox')[0].innerHTML;
+        str = eval(str);
+        document.getElementsByName('msgbox')[0].innerHTML = str;
+      }
+
+    </script>
+  </head>
+
+  <body>
+    <div class="box1"> 简易计算器
+    </div>
+
+    <div class="box2">
+
+      <div name="msgbox" class="msgbox"></div>
+
+      <form name="myform">
+        <p>
+          <input type="button" value="CE" onclick="eval_d1();">
+          <input type="button" value="C" onclick="eval_delete();">
+          <input type="button" value="(" onclick="evalmake('(');">
+          <input type="button" value=")" onclick="evalmake(')');">
+        </p>
+        <p>
+          <input type="button" value="7" onclick="evalmake('7');">
+          <input type="button" value="8" onclick="evalmake('8');">
+          <input type="button" value="9" onclick="evalmake('9');">
+          <input type="button" value="+" onclick="evalmake('+');">
+        </p>
+        <p>
+          <input type="button" value="4" onclick="evalmake('4');">
+          <input type="button" value="5" onclick="evalmake('5');">
+          <input type="button" value="6" onclick="evalmake('6');">
+          <input type="button" value="-" onclick="evalmake('-');">
+        </p>
+        <p>
+          <input type="button" value="1" onclick="evalmake('1');">
+          <input type="button" value="2" onclick="evalmake('2');">
+          <input type="button" value="3" onclick="evalmake('3');">
+          <input type="button" value="X" onclick="evalmake('*');">
+        </p>
+        <p>
+          <input type="button" value="0" onclick="evalmake('0');">
+          <input type="button" value="." onclick="evalmake('.');">
+          <input type="button" value="=" onclick="evaldo('=');">
+          <input type="button" value="/" onclick="evalmake('/');">
+        </p>
+      </form>
+
+      </div>
+
+
+
+  </body>
+</html>
