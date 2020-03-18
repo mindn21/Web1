@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title></title>
+    <script src="Data/jQuery3.4.1_mini.js"></script>
+    <script>
+      $(document).ready(function(){
+        //취향 선택 버튼
+        $(".favo").click(function(){
+          $(".favo").css({"color":"#252525","background-color":"#F6F6F6"});
+          $(this).css({"color":"white","background-color":"#FF5E3B"});
+          $("#showFavo").html($(this).attr("value"));
+        })
+
+        //시작하고 중지 할 때 아래 케릭터 이미지 바꾸기
+        $("#sta").click(function(){
+          $("#pic").attr("src","img/lunchtime/1_2.png")
+        })
+        $("#sto").click(function(){
+          $("#pic").attr("src","img/lunchtime/1_3.png")
+        })
+
+      })
+
+      //음식 사진 바뀌는 부분
+      var cnt = 1;
+      function PrintTime() {
+        //성향을 선택 했는지 먼저 체크
+
+        if($("#showFavo").html() == "↑选择喜欢的分类↑") {
+          $("#showFavo").html("全部")
+        }
+
+        //모든 음식을 선택했을 경우
+        if($("#showFavo").text()=="全部"){
+          if(cnt>57) cnt=1;
+          if (cnt<57) { //총 사진수 -1
+            $("#result").attr("src","img/allfood/"+cnt+".png");
+            cnt++;
+          }
+          //위에 if문에는 그림 수보다 하나 적은 숫자만 체크하고
+          //여기 else에서 마지막 그림을 보여주고 cnt를 초기화 해야함
+          //else로 들어온 것도 함수를 한번 돌린거기 때문에 공백이 생김
+          else {
+            $("#result").attr("src","img/allfood/"+cnt+".png");
+            cnt=1;
+          }
+        }
+
+        //저 칼로리 선택
+        else if($("#showFavo").text()=="低卡"){
+          if(cnt>3) cnt=1;
+          if (cnt<3) { //총 사진수 -1
+            $("#result").attr("src","img/lowcal/"+cnt+".png");
+            cnt++;
+          }
+          //위에 if문에는 그림 수보다 하나 적은 숫자만 체크하고
+          //여기 else에서 마지막 그림을 보여주고 cnt를 초기화 해야함
+          //else로 들어온 것도 함수를 한번 돌린거기 때문에 공백이 생김
+          else {
+            $("#result").attr("src","img/lowcal/"+cnt+".png");
+            cnt=1;
+          }
+        }
+
+        //페스트푸드 선택
+        else if($("#showFavo").text()=="快餐"){
+          if(cnt>9) cnt=1;
+          if (cnt<9) { //총 사진수 -1
+            $("#result").attr("src","img/fastfood/"+cnt+".png");
+            cnt++;
+          }
+          //위에 if문에는 그림 수보다 하나 적은 숫자만 체크하고
+          //여기 else에서 마지막 그림을 보여주고 cnt를 초기화 해야함
+          //else로 들어온 것도 함수를 한번 돌린거기 때문에 공백이 생김
+          else {
+            $("#result").attr("src","img/fastfood/"+cnt+".png");
+            cnt=1;
+          }
+        }
+      }
+
+// 중지를 위해 ID 보관
+      var timerId = null;
+//시작 중지 버튼 실행 함수
+      function StartClock() {
+        if (timerId == null) {
+          PrintTime();
+          timerId = setInterval(PrintTime , 100);
+        }
+
+      }
+
+      function StopClock() {
+        if(timerId != null) {
+          clearInterval(timerId);
+          timerId = null;
+        }
+      }
+    </script>
+
+    <style>
+      #head{ /*로고 부분*/
+        width : 100%;
+        margin : 30px 0px;
+      }
+
+      #selectbox{
+        text-align: center;
+      }
+      .favo{ /*취향 선택 박스*/
+        color : #252525;
+        background-color : #F6F6F6 ;
+        border-radius: 15px;
+        width : 15%;
+        height : 10%;
+        border: none;
+        padding: 10px;
+        font-family : 'SimHei';
+      }
+      #favo_all{ /*우선 선택된 모든 취향*/
+        background-color: #FF5E3B;
+        color : white;
+      }
+
+      #showFavo{
+        text-align: center;
+        margin-top: 20px;
+        font-weight: bold;
+      }
+
+
+      #box1{
+        text-align: center;
+        height : 500px;
+      }
+
+      #box2{
+        height : 80%;
+        margin-bottom: 20px;
+        display : inline-block;
+
+      }
+
+      #result{ /*음식 사진 부분*/
+        width : 30%;
+        display : inline-block;
+        border : 1px solid black;
+        margin : 30px 0;
+      }
+
+      .func{ /*시작 중지 버튼*/
+        color : #252525;
+        background-color : #F6F6F6 ;
+        font-size: 15px;
+        font-weight : bold;
+        border-radius: 15px;
+        width : 15%;
+        height : 7%;
+        padding: 5px;
+        font-family : 'SimHei';
+      }
+
+      #box3{
+        text-align: center;
+      }
+      #pic{ /*하단 이미지 부분*/
+        width : 30%;
+        display: inline-block;
+      }
+
+    </style>
+  </head>
+
+  <body>
+    <img id="head" src = "img/whattoeat.png">
+
+    <!-- IDEA: 셋 중 하나만 선택 가능 -->
+    <div id="selectbox">
+      <input type="button" class = "favo" id="favo_all" value="全部" onclick="">
+      <input type="button" class = "favo" value="低卡" onclick="">
+      <input type="button" class = "favo" value="快餐" onclick="">
+    </div>
+
+
+    <div id="showFavo" style=font-family:'SimHei'>↑选择喜欢的分类↑</div>
+
+    <!-- IDEA: 시작 중지 누르면 아래 이미도 바뀜 -->
+    <div id = "box1">
+      <div id = "box2">
+        <img id="result" src = "img/q.jpg">
+      </div>
+      <br>
+      <input type="button" class = "func" id="sta"value="开始！" onclick="StartClock()">
+      <input type="button" class = "func" id="sto"value="停止！" onclick="StopClock()">
+    </div>
+
+
+
+    <div id=box3>
+      <img id="pic" src="img/lunchtime/1_1.png">
+
+    </div>
+
+  </body>
+
+</html>
